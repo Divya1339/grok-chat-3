@@ -5,10 +5,94 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Groq Robot Chat</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Ensure input is above robot */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100vh;
+      justify-content: flex-start;
+    }
+
+    h1 {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .robot-container {
+      position: relative;
+      z-index: 0; /* robot behind chat */
+      margin: 20px 0;
+    }
+
+    #chat-box {
+      width: 90%;
+      max-width: 500px;
+      height: 300px;
+      overflow-y: auto;
+      background: white;
+      border-radius: 10px;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      z-index: 1;
+    }
+
+    .msg {
+      padding: 6px 10px;
+      margin: 5px 0;
+      border-radius: 8px;
+    }
+
+    .msg.bot {
+      background: #e0e0e0;
+      text-align: left;
+    }
+
+    .msg.user {
+      background: #4caf50;
+      color: white;
+      text-align: right;
+    }
+
+    .input-row {
+      display: flex;
+      width: 90%;
+      max-width: 500px;
+      gap: 10px;
+      z-index: 2;
+    }
+
+    #user-input {
+      flex: 1;
+      padding: 8px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+
+    #send-btn {
+      padding: 8px 12px;
+      border: none;
+      border-radius: 5px;
+      background-color: #4caf50;
+      color: white;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    #send-btn:hover {
+      background-color: #45a049;
+    }
+  </style>
 </head>
 <body>
 
-  <h1> Robot Assistant</h1>
+  <h1>Robot Assistant</h1>
 
   <!-- ROBOT -->
   <div class="robot-container">
