@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Groq Robot Chat</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <h1> Robot Assistant</h1>
+
+  <!-- ROBOT -->
+  <div class="robot-container">
+    <div class="robot" id="robot">
+      <div class="head">
+        <span class="eye"></span>
+        <span class="eye"></span>
+      </div>
+
+      <div class="body"></div>
+
+      <div class="arm left" id="leftArm"></div>
+      <div class="arm right wave" id="rightArm"></div>
+    </div>
+  </div>
+
+  <!-- CHAT -->
+  <div id="chat-box">
+    <div class="msg bot">Hi 👋 I’m your assistant. Ask me anything!</div>
+  </div>
+
+  <!-- INPUT -->
+  <div class="input-row">
+    <input id="user-input" type="text" placeholder="Type your message..." autocomplete="off" />
+    <button id="send-btn">Send</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

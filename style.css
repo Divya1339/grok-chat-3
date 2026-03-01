@@ -1,0 +1,155 @@
+body{
+  margin:0;
+  font-family: system-ui;
+  background: linear-gradient(180deg,#f8d7e8,#cfe9ff,#b8daf2);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:30px;
+}
+
+h1{
+  color:white;
+  text-shadow:0 5px 20px rgba(0,0,0,0.2);
+}
+
+/* ROBOT */
+.robot-container{
+  margin:10px;
+}
+
+.robot{
+  width:80px;
+  animation: float 3s infinite ease-in-out;
+}
+
+@keyframes float{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-5px);}
+}
+
+.head{
+  width:80px;height:60px;
+  background:white;
+  border-radius:20px;
+  text-align:center;
+  padding-top:15px;
+}
+
+.eye{
+  width:10px;height:10px;
+  background:black;
+  border-radius:50%;
+  display:inline-block;
+  margin:0 10px;
+  animation: blink 4s infinite;
+}
+
+@keyframes blink{
+  0%,95%,100%{transform:scaleY(1);}
+  97%{transform:scaleY(0.1);}
+}
+
+.body{
+  width:60px;height:50px;
+  background:#a2d2ff;
+  margin:5px auto;
+  border-radius:15px;
+}
+
+.arm{
+  width:12px;height:40px;
+  background:#a2d2ff;
+  position:absolute;
+  top:75px;
+}
+
+.left{ left:-10px; }
+.right{ right:-10px; }
+
+.wave{
+  animation: wave 0.6s infinite alternate;
+}
+
+@keyframes wave{
+  from{transform:rotate(0deg);}
+  to{transform:rotate(25deg);}
+}
+
+.walk{
+  animation: walk 0.6s infinite alternate;
+}
+
+@keyframes walk{
+  from{transform:translateX(-5px);}
+  to{transform:translateX(5px);}
+}
+
+/* CHAT */
+#chat-box{
+  width:500px;
+  height:400px;
+  background:white;
+  border-radius:20px;
+  padding:15px;
+  overflow-y:auto;
+  margin:15px 0;
+  box-shadow:0 10px 30px rgba(0,0,0,0.1);
+}
+
+.msg{
+  padding:8px 12px;
+  border-radius:12px;
+  margin:8px 0;
+  max-width:80%;
+}
+
+.me{
+  background:#8fd3ff;
+  margin-left:auto;
+}
+
+.bot{
+  background:#ffd6a5;
+}
+
+/* INPUT */
+.input-row{
+  display:flex;
+  gap:10px;
+  width:500px;
+}
+
+#user-input{
+  flex:1;
+  padding:10px;
+  border-radius:10px;
+  border:1px solid #ccc;
+}
+
+#send-btn{
+  padding:10px 15px;
+  border:none;
+  border-radius:10px;
+  background:#d334ce;
+  color:white;
+  cursor:pointer;
+}
+
+/* TYPING DOTS */
+.typing span{
+  display:inline-block;
+  width:6px;height:6px;
+  background:black;
+  border-radius:50%;
+  margin:0 2px;
+  animation:bounce 1.2s infinite;
+}
+
+.typing span:nth-child(2){animation-delay:0.2s;}
+.typing span:nth-child(3){animation-delay:0.4s;}
+
+@keyframes bounce{
+  0%,80%,100%{transform:scale(0);}
+  40%{transform:scale(1);}
+}
