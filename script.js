@@ -1,69 +1,50 @@
+// script.js
+
+// Get DOM elements
 const chatBox = document.getElementById("chat-box");
-const userInput = document.getElementById("user-input");
+const input = document.getElementById("user-input");
 const sendBtn = document.getElementById("send-btn");
 
-function addMessage(text, who) {
-  const div = document.createElement("div");
-  div.className = `msg ${who}`;
-  div.textContent = text;
-  chatBox.appendChild(div);
+// Function to append messages
+function appendMessage(message, sender) {
+  const msgDiv = document.createElement("div");
+  msgDiv.classList.add("msg", sender);
+  msgDiv.textContent = message;
+  chatBox.appendChild(msgDiv);
   chatBox.scrollTop = chatBox.scrollHeight;
 }
 
-function addTyping() {
-  const div = document.createElement("div");
-  div.className = "msg bot typing";
-  div.id = "typing-indicator";
-  div.innerHTML = `<span></span><span></span><span></span>`;
-  chatBox.appendChild(div);
-  chatBox.scrollTop = chatBox.scrollHeight;
-}
-
-function removeTyping() {
-  const el = document.getElementById("typing-indicator");
-  if (el) el.remove();
-}
-
+// Function to send user message and get bot reply
 async function sendMessage() {
-  const text = userInput.value.trim();
-  if (!text) return;
+  const userMessage = input.value.trim();
+  if (!userMessage) return;
 
-  addMessage(text, "me");
-  userInput.value = "";
-  addTyping();
+  // Display user message
+  appendMessage(userMessage, "user");
+  input.value = "";
 
   try {
-    // IMPORTANT:
-    // If you open the page from http://localhost:3000 (served by Express),
-    // you can use "/chat".
-    // If you open from Live Server (5500), use "http://localhost:3000/chat".
-    const CHAT_URL = "/chat";
-
-    const res = await fetch(CHAT_URL, {
+    // Call serverless function
+    const response = await fetch("/api/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message: text }),
+      body: JSON.stringify({ message: userMessage })
     });
 
-    const data = await res.json();
-    removeTyping();
+    const data = await response.json();
+    const botReply = data.reply || "Sorry, no reply received.";
 
-    if (!res.ok) {
-      addMessage(`❌ ${data?.reply || "Error talking to server"}`, "bot");
-      return;
-    }
+    // Display bot reply
+    appendMessage(botReply, "bot");
 
-    addMessage(data.reply || "No reply returned.", "bot");
   } catch (err) {
-    removeTyping();
-    addMessage(`❌ Network error: ${String(err)}`, "bot");
+    appendMessage(`Error: ${err.message}`, "bot");
+    console.error("Chat error:", err);
   }
 }
 
-// Button click
+// Event listeners
 sendBtn.addEventListener("click", sendMessage);
-
-// Enter key send
-userInput.addEventListener("keydown", (e) => {
+input.addEventListener("keypress", (e) => {
   if (e.key === "Enter") sendMessage();
 });
