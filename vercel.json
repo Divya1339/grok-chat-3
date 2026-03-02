@@ -1,6 +1,9 @@
 {
   "version": 2,
+  "buildCommand": "npm install",
+  "serverlessFunctionRegion": "us-east-1",
   "rewrites": [
-    { "source": "/", "destination": "/index.html" }
+    { "source": "/api/(.*)", "destination": "/server.js" },
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
